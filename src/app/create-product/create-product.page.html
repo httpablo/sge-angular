@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastrar Produto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="voltarParaProdutos()">Voltar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="confirmarCadastro()">
+    <ion-item>
+      <ion-label position="floating">Título</ion-label>
+      <ion-input [(ngModel)]="product.title" name="title" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Descrição</ion-label>
+      <ion-textarea [(ngModel)]="product.description" name="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número de Série</ion-label>
+      <ion-input [(ngModel)]="product.serie_number" name="serie_number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Preço de Custo</ion-label>
+      <ion-input [(ngModel)]="product.cost_price" name="cost_price" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Preço de Venda</ion-label>
+      <ion-input [(ngModel)]="product.selling_price" name="selling_price" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Quantidade</ion-label>
+      <ion-input [(ngModel)]="product.quantity" name="quantity" type="number" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Categoria</ion-label>
+      <ion-select [(ngModel)]="product.category" name="category" required>
+        <ion-select-option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-select [(ngModel)]="product.brand" name="brand" required>
+        <ion-select-option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>    
+
+    <ion-button expand="full" type="submit">Cadastrar Produto</ion-button>
+  </form>
+</ion-content>

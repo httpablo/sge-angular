@@ -15,6 +15,7 @@ import {
   AlertController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -34,7 +35,8 @@ export class ProductPage implements OnInit {
     public controle_toast: ToastController,
     public controle_navegacao: NavController,
     public controle_carregamento: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -121,6 +123,10 @@ export class ProductPage implements OnInit {
           mensagem.present();
         },
       });
+  }
+  
+  navigateToCreateProduct() {
+    this.router.navigate(['/create-product']);
   }
 
   async logout() {

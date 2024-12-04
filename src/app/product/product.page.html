@@ -9,7 +9,11 @@
 
 <ion-toolbar color="light">
   <ion-buttons slot="start">
-    <ion-button color="secondary" expand="block" fill="solid">
+    <ion-button 
+      color="secondary" 
+      expand="block" 
+      fill="solid" 
+      (click)="navigateToCreateProduct()">
       <ion-icon name="add-circle-outline" slot="start"></ion-icon>
       Cadastrar Produto
     </ion-button>
@@ -32,7 +36,6 @@
 
     <ion-card-content class="product-info">
       <p>{{ product.brand }}</p>
-      <p>{{ product.description }}</p>
       <p class="product-price">
         <ion-icon name="cash" slot="start"></ion-icon> 
         {{ product.selling_price | currency }}
@@ -40,10 +43,8 @@
       
     </ion-card-content>
 
-    <ion-item-options>
-      <ion-item-option color="danger" (click)="excluirProduct(product.id)">
-        Excluir
-      </ion-item-option>
-    </ion-item-options>
+    <ion-button color="danger" (click)="excluirProduct(product.id)" expand="full">
+      Excluir Produto
+    </ion-button>
   </ion-card>
 </ion-content>
