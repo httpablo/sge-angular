@@ -1,8 +1,6 @@
 export class Product {
   public id: number;
   public title: string;
-  public category_name: string; 
-  public brand_name: string;   
   public description: string | undefined;
   public serie_number: string | undefined;
   public cost_price: number;
@@ -10,12 +8,12 @@ export class Product {
   public quantity: number;
   public created_at: string;
   public updated_at: string;
+  public category: string;
+  public brand: string;
 
   constructor() {
     this.id = 0;
-    this.title = '';
-    this.category_name = ''; 
-    this.brand_name = '';    
+    this.title = '';   
     this.description = '';
     this.serie_number = '';
     this.cost_price = 0;
@@ -23,5 +21,7 @@ export class Product {
     this.quantity = 0;
     this.created_at = '';
     this.updated_at = '';
+    this.category = ''; 
+    this.brand = ''; 
   }
 }
