@@ -89,38 +89,46 @@ export class ProductPage implements OnInit {
   }
 
   async excluirProduct(id: number) {
-    // Inicializa interface com efeito de carregamento
     const loading = await this.controle_carregamento.create({
-      message: 'Autenticando...',
+      message: 'Excluindo...',
       duration: 30000,
     });
     await loading.present();
-
+  
     let http_headers: HttpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.usuario.token}`,
     });
-
-    // Deleta instância de veículo via API do sistema web
+  
     this.http
       .delete(`http://127.0.0.1:8000/api/v1/products/${id}/`, {
         headers: http_headers,
       })
       .subscribe({
         next: async (resposta: any) => {
+          // Atualiza a lista de produtos após a exclusão
           this.consultarProductsSistemaWeb();
-
-          // Finaliza interface com efeito de carregamento
           loading.dismiss();
         },
         error: async (erro: any) => {
           loading.dismiss();
-          const mensagem = await this.controle_toast.create({
-            message: `Falha ao excluir o veículo: ${erro.message}`,
-            cssClass: 'ion-text-center',
-            duration: 2000,
-          });
-          mensagem.present();
+          
+          // Verifica se o erro é de violação de chave estrangeira
+          if (erro.status === 500) {
+            const mensagem = await this.controle_toast.create({
+              message: 'Não é possível excluir este produto. Ele está vinculado a uma categoria ou marca que não pode ser removida.',
+              cssClass: 'ion-text-center',
+              duration: 3000,
+            });
+            mensagem.present();
+          } else {
+            const mensagem = await this.controle_toast.create({
+              message: `Falha ao excluir o produto: ${erro.message}`,
+              cssClass: 'ion-text-center',
+              duration: 2000,
+            });
+            mensagem.present();
+          }
         },
       });
   }
