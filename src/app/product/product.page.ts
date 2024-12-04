@@ -41,8 +41,6 @@ export class ProductPage implements OnInit {
 
     if (registro) {
       this.usuario = Object.assign(new Usuario(), registro);
-      console.log('Usuário carregado:', this.usuario);
-      console.log('Token carregado:', this.usuario.token);
 
       // Chamar o método para listar produtos
       this.consultarProductsSistemaWeb();
@@ -63,22 +61,16 @@ export class ProductPage implements OnInit {
       Authorization: `Bearer ${this.usuario.token}`,
     });
 
-    console.log('Token JWT usado:', this.usuario.token); // Log do token
-    console.log('Cabeçalhos HTTP enviados:', httpHeaders); // Log dos headers
-
     this.http
       .get<Product[]>('http://127.0.0.1:8000/api/v1/products/', {
         headers: httpHeaders,
       })
       .subscribe({
         next: async (resposta: Product[]) => {
-          console.log('Resposta da API recebida:', resposta); // Log dos produtos retornados
           this.products = resposta;
-          console.log('Produtos atribuídos à variável:', this.products); // Log após a atribuição
           await Loading.dismiss();
         },
         error: async (erro: any) => {
-          console.error('Erro na requisição:', erro); // Log do erro
           await Loading.dismiss();
           const message = await this.controle_toast.create({
             message: `Erro ao carregar produtos: ${
