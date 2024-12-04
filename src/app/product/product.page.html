@@ -7,6 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-toolbar color="light">
+  <ion-buttons slot="start">
+    <ion-button color="secondary" expand="block" fill="solid">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Cadastrar Produto
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="end">
+    <ion-button fill="clear" color="danger" (click)="logout()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Sair
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let product of products" class="product-card">
 
